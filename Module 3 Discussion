@@ -1,0 +1,55 @@
+new Wine (78).Dump();
+new Wine (78, 2001).Dump();
+
+public class Wine
+{
+  public decimal Price;
+  public int Year;
+  public Wine (decimal price) => Price = price;
+  public Wine (decimal price, int year) : this (price) => Year = year;
+}
+Constructors - Nonpublic
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// A common reason to have a nonpublic constructor is to control instance creation via a
+// static method call:
+using System;
+
+public class Wine
+{
+    public decimal Price;  // Field for wine price
+    public int Year;       // Field for wine year
+
+    // Constructor that takes only price
+    public Wine(decimal price)
+    {
+        Price = price;     // Set the price
+    }
+
+    // Constructor that takes price and year
+    public Wine(decimal price, int year) : this(price)  // Calls the first constructor to set price
+    {
+        Year = year;       // Set the year
+    }
+
+    // Method to print the Wine details
+    public void Print()
+    {
+        Console.WriteLine($"Wine Price: {Price}, Year: {(Year == 0 ? "Unknown" : Year.ToString())}");
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Create Wine with only price
+        Wine wine1 = new Wine(78);
+        wine1.Print();  // Output: Wine Price: 78, Year: Unknown
+
+        // Create Wine with price and year
+        Wine wine2 = new Wine(78, 2001);
+        wine2.Print();  // Output: Wine Price: 78, Year: 2001
+    }
+}
